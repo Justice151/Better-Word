@@ -15,6 +15,22 @@
     </header>
 
     <main>
+        <!-- Toolbar for text formatting -->
+        <div id="toolbar">
+            <button id="boldButton"><b>B</b></button>
+            <button id="italicButton"><i>I</i></button>
+            <button id="underlineButton"><u>U</u></button>
+            <input type="color" id="fontColorPicker">
+            <input type="number" id="fontSizeInput" min="8" max="72" value="12"> px
+            <select id="textAlignSelect">
+                <option value="left">Left</option>
+                <option value="center">Center</option>
+                <option value="right">Right</option>
+                <option value="justify">Justify</option>
+            </select>
+        </div>
+
+        <!-- Document editor -->
         <div id="editor" contenteditable="true">
             <!-- Document content goes here -->
         </div>
