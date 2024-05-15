@@ -1,74 +1,37 @@
-// scripts.js
-
-document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener('DOMContentLoaded', function() {
     const editor = document.getElementById('editor');
-    const spellChecker = new Typo('en_US'); // Create a Typo.js instance for English
+    const spellCheckButton = document.getElementById('spellCheckButton');
 
-    // Function to toggle text formatting
-    function toggleFormat(command, value) {
-        document.execCommand(command, false, value);
-    }
+    let typo;
+    let misspelledWords = [];
 
-    // Function to check spelling and highlight misspelled words
-    function checkSpelling() {
+    // Initialize Typo.js with English (US) dictionary
+    fetch('https://cdn.jsdelivr.net/npm/typo-js@1.1.2/typo/dictionaries/en_US/en_US.dic')
+        .then(response => response.text())
+        .then(data => {
+            typo = new Typo('en_US', false, false, { dictionary: data });
+        })
+        .catch(error => {
+            console.error('Error loading dictionary:', error);
+        });
+
+    // Function to spell check the content of the editor
+    function spellCheck() {
         const text = editor.innerText;
         const words = text.split(/\s+/);
-        for (const word of words) {
-            if (!spellChecker.check(word)) {
-                const regex = new RegExp('\\b' + word + '\\b', 'gi');
-                const match = text.match(regex);
-                if (match) {
-                    editor.innerHTML = editor.innerHTML.replace(regex, `<span class="misspelled">${word}</span>`);
-                }
-            }
+        misspelledWords = words.filter(word => !typo.check(word));
+
+        if (misspelledWords.length > 0) {
+            // Highlight misspelled words
+            misspelledWords.forEach(word => {
+                const regex = new RegExp(word, 'gi');
+                editor.innerHTML = editor.innerHTML.replace(regex, `<span class="misspelled">${word}</span>`);
+            });
+        } else {
+            alert('No misspelled words found.');
         }
     }
 
-    // Event listener to check spelling on input
-    editor.addEventListener('input', checkSpelling);
-
-    // Event listener for auto-save
-    editor.addEventListener('input', function () {
-        saveContent(); // Save content to local storage on every input change
-    });
-
-    // Function to save document content to local storage
-    function saveContent() {
-        const content = editor.innerHTML;
-        localStorage.setItem('documentContent', content);
-    }
-
-    // Load saved content from local storage
-    const savedContent = localStorage.getItem('documentContent');
-    if (savedContent) {
-        editor.innerHTML = savedContent;
-    }
-
-    // Event listeners for toolbar buttons
-    document.getElementById('boldButton').addEventListener('click', function () {
-        toggleFormat('bold');
-    });
-
-    document.getElementById('italicButton').addEventListener('click', function () {
-        toggleFormat('italic');
-    });
-
-    document.getElementById('underlineButton').addEventListener('click', function () {
-        toggleFormat('underline');
-    });
-
-    document.getElementById('fontColorPicker').addEventListener('change', function () {
-        const color = fontColorPicker.value;
-        toggleFormat('foreColor', color);
-    });
-
-    document.getElementById('fontSizeInput').addEventListener('change', function () {
-        const size = fontSizeInput.value;
-        toggleFormat('fontSize', size + 'px');
-    });
-
-    document.getElementById('textAlignSelect').addEventListener('change', function () {
-        const alignment = textAlignSelect.value;
-        toggleFormat('justify', alignment);
-    });
+    // Event listener for spell check button
+    spellCheckButton.addEventListener('click', spellCheck);
 });
