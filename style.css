@@ -23,3 +23,9 @@
     border-radius: 5px;
     cursor: pointer;
 }
+
+/* Styling for misspelled words */
+.misspelled {
+    background-color: #ffcdd2; /* Light red background for misspelled words */
+    border-bottom: 1px solid red; /* Red underline for misspelled words */
+}
