@@ -41,4 +41,44 @@ document.addEventListener('DOMContentLoaded', function () {
         const alignment = textAlignSelect.value;
         toggleFormat('justify', alignment);
     });
+
+    // Keyboard shortcuts
+    document.addEventListener('keydown', function (event) {
+        if (event.ctrlKey || event.metaKey) { // Check if Ctrl or Command key is pressed
+            switch (event.key.toLowerCase()) {
+                case 'b':
+                    toggleFormat('bold');
+                    event.preventDefault(); // Prevent default browser behavior
+                    break;
+                case 'i':
+                    toggleFormat('italic');
+                    event.preventDefault();
+                    break;
+                case 'u':
+                    toggleFormat('underline');
+                    event.preventDefault();
+                    break;
+                case 'c':
+                    document.execCommand('copy');
+                    event.preventDefault();
+                    break;
+                case 'v':
+                    document.execCommand('paste');
+                    event.preventDefault();
+                    break;
+                case 'x':
+                    document.execCommand('cut');
+                    event.preventDefault();
+                    break;
+                case 'z':
+                    document.execCommand('undo');
+                    event.preventDefault();
+                    break;
+                case 'y':
+                    document.execCommand('redo');
+                    event.preventDefault();
+                    break;
+            }
+        }
+    });
 });
