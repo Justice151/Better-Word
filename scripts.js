@@ -27,6 +27,23 @@ document.addEventListener('DOMContentLoaded', function () {
     // Event listener to check spelling on input
     editor.addEventListener('input', checkSpelling);
 
+    // Event listener for auto-save
+    editor.addEventListener('input', function () {
+        saveContent(); // Save content to local storage on every input change
+    });
+
+    // Function to save document content to local storage
+    function saveContent() {
+        const content = editor.innerHTML;
+        localStorage.setItem('documentContent', content);
+    }
+
+    // Load saved content from local storage
+    const savedContent = localStorage.getItem('documentContent');
+    if (savedContent) {
+        editor.innerHTML = savedContent;
+    }
+
     // Event listeners for toolbar buttons
     document.getElementById('boldButton').addEventListener('click', function () {
         toggleFormat('bold');
