@@ -71,11 +71,15 @@ document.addEventListener('DOMContentLoaded', function () {
                     event.preventDefault();
                     break;
                 case 'z':
-                    document.execCommand('undo');
+                    if (event.shiftKey) {
+                        document.execCommand('redo'); // Redo (Ctrl+Shift+Z)
+                    } else {
+                        document.execCommand('undo'); // Undo (Ctrl+Z)
+                    }
                     event.preventDefault();
                     break;
                 case 'y':
-                    document.execCommand('redo');
+                    document.execCommand('redo'); // Redo (Ctrl+Y)
                     event.preventDefault();
                     break;
             }
