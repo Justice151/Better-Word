@@ -2,27 +2,43 @@
 
 document.addEventListener('DOMContentLoaded', function () {
     const editor = document.getElementById('editor');
+    const boldButton = document.getElementById('boldButton');
+    const italicButton = document.getElementById('italicButton');
+    const underlineButton = document.getElementById('underlineButton');
+    const fontColorPicker = document.getElementById('fontColorPicker');
+    const fontSizeInput = document.getElementById('fontSizeInput');
+    const textAlignSelect = document.getElementById('textAlignSelect');
 
-    // Load document content from local storage
-    const savedContent = localStorage.getItem('documentContent');
-    if (savedContent) {
-        editor.innerHTML = savedContent;
+    // Function to toggle text formatting
+    function toggleFormat(command, value) {
+        document.execCommand(command, false, value);
     }
 
-    // Save document content to local storage when user stops typing
-    let typingTimer;
-    editor.addEventListener('input', function () {
-        clearTimeout(typingTimer);
-        typingTimer = setTimeout(function () {
-            const content = editor.innerHTML;
-            localStorage.setItem('documentContent', content);
-        }, 1000); // Adjust the delay as needed
+    // Event listeners for toolbar buttons
+    boldButton.addEventListener('click', function () {
+        toggleFormat('bold');
     });
 
-    // Clear document content and local storage
-    const clearButton = document.getElementById('clearButton');
-    clearButton.addEventListener('click', function () {
-        editor.innerHTML = '';
-        localStorage.removeItem('documentContent');
+    italicButton.addEventListener('click', function () {
+        toggleFormat('italic');
+    });
+
+    underlineButton.addEventListener('click', function () {
+        toggleFormat('underline');
+    });
+
+    fontColorPicker.addEventListener('change', function () {
+        const color = fontColorPicker.value;
+        toggleFormat('foreColor', color);
+    });
+
+    fontSizeInput.addEventListener('change', function () {
+        const size = fontSizeInput.value;
+        toggleFormat('fontSize', size + 'px');
+    });
+
+    textAlignSelect.addEventListener('change', function () {
+        const alignment = textAlignSelect.value;
+        toggleFormat('justify', alignment);
     });
 });
