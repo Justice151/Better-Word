@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Web-based Word Processor</title>
+    <title>Login / Create Account</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 
@@ -15,8 +15,38 @@
     </header>
 
     <main>
+        <!-- Login / Create Account Section -->
+        <div class="container">
+            <div id="loginFormSection">
+                <h2>Login</h2>
+                <form id="loginForm">
+                    <label for="username">Username:</label>
+                    <input type="text" id="username" name="username" required><br>
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" name="password" required><br>
+                    <button type="submit">Login</button>
+                </form>
+                <p>Don't have an account? <button id="toggleCreateAccount">Create one</button></p>
+            </div>
+            <div id="createAccountFormSection" style="display: none;">
+                <h2>Create Account</h2>
+                <form id="createAccountForm">
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" name="name" required><br>
+                    <label for="phoneNumber">Phone Number:</label>
+                    <input type="tel" id="phoneNumber" name="phoneNumber" required><br>
+                    <label for="newUsername">Username:</label>
+                    <input type="text" id="newUsername" name="newUsername" required><br>
+                    <label for="newPassword">Password:</label>
+                    <input type="password" id="newPassword" name="newPassword" required><br>
+                    <button type="submit">Create Account</button>
+                </form>
+                <p>Already have an account? <button id="toggleLogin">Login</button></p>
+            </div>
+        </div>
+
         <!-- Toolbar for text formatting -->
-        <div id="toolbar">
+        <div id="toolbar" style="display: none;">
             <button id="boldButton"><b>B</b></button>
             <button id="italicButton"><i>I</i></button>
             <button id="underlineButton"><u>U</u></button>
@@ -31,7 +61,7 @@
         </div>
 
         <!-- Document editor -->
-        <div id="editor" contenteditable="true">
+        <div id="editor" contenteditable="true" style="display: none;">
             <!-- Document content goes here -->
         </div>
     </main>
