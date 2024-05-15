@@ -1,31 +1,45 @@
-/* styles.css */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(to bottom, #cceeff 0%, #0077cc 100%);
+}
 
-/* Styling for the toolbar */
+.container {
+    width: 80%;
+    margin: 0 auto;
+    padding-top: 50px; /* Adjust as needed */
+    padding-bottom: 50px; /* Adjust as needed */
+    text-align: center;
+}
+
 #toolbar {
-    margin-bottom: 10px;
+    margin-bottom: 20px;
 }
 
-/* Styling for toolbar buttons */
-#toolbar button {
+#editor {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    min-height: 300px; /* Adjust as needed */
+}
+
+#spellCheckButton {
+    margin-left: 10px;
+    padding: 5px 10px;
     border: none;
-    background-color: #ffffff;
-    color: #333;
-    padding: 8px 12px;
-    margin-right: 5px;
-    border-radius: 5px;
+    border-radius: 4px;
+    background-color: #4CAF50;
+    color: white;
     cursor: pointer;
+    transition: background-color 0.3s;
 }
 
-/* Styling for font color picker */
-#fontColorPicker {
-    border: none;
-    padding: 3px;
-    border-radius: 5px;
-    cursor: pointer;
+#spellCheckButton:hover {
+    background-color: #45a049;
 }
 
-/* Styling for misspelled words */
-.misspelled {
-    background-color: #ffcdd2; /* Light red background for misspelled words */
-    border-bottom: 1px solid red; /* Red underline for misspelled words */
+footer {
+    text-align: center;
+    margin-top: 20px;
 }
